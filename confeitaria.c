@@ -169,5 +169,15 @@ int main() {
     free(pedido);
 
     return 0;
+
+    // Tratamento de Erro: Adicionei verificações para malloc() para garantir que a memória foi alocada corretamente.
+
+// Correção de Buffer: Adicionei getchar() para limpar o buffer de entrada antes de usar fgets após scanf, 
+// para evitar problemas com a leitura de strings.
+
+// Liberando Memória: Adicionei free() para liberar a memória alocada dinamicamente ao final do programa.
+
+// Impressão Completa do Resumo do Pedido: Adicionei a impressão dos detalhes do pedido, 
+// como quantidade e valor total, e informações do cliente. 
 }
 
