@@ -37,8 +37,6 @@ int bem_vindo() {
     printf("*           Bem-vindo A Confeitaria          *\n");
     printf("*        === Delicias Tecnologicas ===       *\n");
     printf("**********************************************\n");
-    printf("Digite o numero da opcao desejada: ");
-    scanf("%d", &option);
     printf("\033[1;1H\033[2J"); // Limpa a tela
     return option;
 }
@@ -48,6 +46,9 @@ void menu() {
     printf("*                Bem-vindo                 *\n");
     printf("*      Conheca um pouco do nosso menu      *\n");
     printf("********************************************\n");
+    printf("Qual das opcoes deseja?\n");
+    printf("1- Nega Maluca (R$ 80)\n");
+    printf("2- Cento Salgados (R$ 120)\n");
 }
 
 Escolha* escolha_menu() {
@@ -56,10 +57,7 @@ Escolha* escolha_menu() {
         printf("Erro ao alocar memória!\n");
         exit(1);
     }
-
-    printf("Qual das opcoes deseja?\n");
-    printf("1- Nega Maluca (R$ 80)\n");
-    printf("2- Cento Salgados (R$ 120)\n");
+    menu();
     printf("Opcao: ");
     scanf("%d", &escolha->produto);
     printf("Digite a quantidade que deseja: ");
@@ -135,10 +133,7 @@ Pedido* fazer_pedido(Produto* produto_escolhido, int qntd) {
     pedido->num_pedido = rand() % 900000 + 100000;
     pedido->qntd = qntd;
     pedido->valor_pedido = produto_escolhido->valor * qntd;
-
-    printf("\nForma de pagamento:\n");
-
-    return pedido;
+    return pedido; // Corrigido para retornar o ponteiro do pedido em vez de 0
 }
 
 int main() {
@@ -149,8 +144,6 @@ int main() {
     Pedido* pedido;
 
     opcao = bem_vindo();
-    menu();
-
     escolha = escolha_menu();
     produto = produto_escolher(escolha->produto);
 
@@ -178,12 +171,3 @@ int main() {
     return 0;
 }
 
-// Tratamento de Erro: Adicionei verificações para malloc() para garantir que a memória foi alocada corretamente.
-
-// Correção de Buffer: Adicionei getchar() para limpar o buffer de entrada antes de usar fgets após scanf, 
-// para evitar problemas com a leitura de strings.
-
-// Liberando Memória: Adicionei free() para liberar a memória alocada dinamicamente ao final do programa.
-
-// Impressão Completa do Resumo do Pedido: Adicionei a impressão dos detalhes do pedido, 
-// como quantidade e valor total, e informações do cliente. 
